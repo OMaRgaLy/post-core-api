@@ -1,6 +1,9 @@
 package kz.dar.academy.controller;
 
 import kz.dar.academy.model.PostModel;
+import kz.dar.academy.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,34 +14,41 @@ import java.util.List;
 @RequestMapping("/post")
 public class PostController {
 
+    @Autowired
+    private PostService postService;
+
     @GetMapping("/check")
     public ResponseEntity<String> isWorkingCheck() {
-        return null;
+        postService.isWorkingCheck();
+        return new ResponseEntity<String>("post-core-api is working", HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<String> createPost(@Valid @RequestBody PostModel postModel) {
-        return null;
+        postService.createPost(postModel);
+        return new ResponseEntity<String>("Succesfully created", HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public List<PostModel> getAllPosts() {
-        return null;
+        return postService.getAllPosts();
     }
 
     @GetMapping("/{postId}")
     public PostModel getPostById(@PathVariable String postId) {
-        return null;
+        return postService.getPostById(postId);
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<String> updatePostById(@PathVariable String postId,
                                                      @Valid @RequestBody PostModel postModel) {
-        return null;
+        postService.updatePostById(postId, postModel);
+        return new ResponseEntity<String>("Succesfully updated", HttpStatus.OK);
     }
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> deletePostById(@PathVariable String postId) {
-        return null;
+        postService.deletePostById(postId);
+        return new ResponseEntity<String>("Succesfully deleted", HttpStatus.OK);
     }
 }

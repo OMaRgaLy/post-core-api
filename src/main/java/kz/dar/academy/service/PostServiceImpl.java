@@ -13,20 +13,21 @@ public class PostServiceImpl implements PostService{
     private static final HashMap<String, PostModel> postMap = new HashMap<>();
 
     static {
-        PostModel PostModel1 = new PostModel(UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+        PostModel postModel1 = new PostModel(UUID.randomUUID().toString(), UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(), "Diploma", "In progress");
-        PostModel PostModel2 = new PostModel(UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+        PostModel postModel2 = new PostModel(UUID.randomUUID().toString(), UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(), "Certificate", "In progress");
-        PostModel PostModel3 = new PostModel(UUID.randomUUID().toString(), UUID.randomUUID().toString(),
+        PostModel postModel3 = new PostModel(UUID.randomUUID().toString(), UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(), "Documents", "Completed");
 
-        postMap.put(PostModel1.getPostId(), PostModel1);
-        postMap.put(PostModel2.getPostId(), PostModel2);
-        postMap.put(PostModel3.getPostId(), PostModel3);
+        postMap.put(postModel1.getPostId(), postModel1);
+        postMap.put(postModel2.getPostId(), postModel2);
+        postMap.put(postModel3.getPostId(), postModel3);
     }
 
     @Override
     public void isWorkingCheck() {
+        System.out.print("");
     }
 
     @Override
