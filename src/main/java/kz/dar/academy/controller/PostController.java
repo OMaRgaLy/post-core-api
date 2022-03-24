@@ -3,6 +3,7 @@ package kz.dar.academy.controller;
 import kz.dar.academy.model.PostModel;
 import kz.dar.academy.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,13 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    Environment env;
+
     @GetMapping("/check")
     public ResponseEntity<String> isWorkingCheck() {
         postService.isWorkingCheck();
-        return new ResponseEntity<String>("post-core-api is working", HttpStatus.OK);
+        return new ResponseEntity<String>("post-core-api is working at the port " + env.getProperty("local.server.port"), HttpStatus.OK);
     }
 
     @PostMapping
