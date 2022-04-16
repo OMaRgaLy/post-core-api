@@ -9,12 +9,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PostModel {
-    @NotNull(message = "Post id can not be empty")
+public class PostResponse {
+    @NotNull
     private String postId;
-    @NotNull(message = "Client id can not be empty")
+    @NotNull
     private String clientId;
-    @NotNull(message = "Recipient id can not be empty")
+    @NotNull
     private String postRecipientId;
     private String postItem;
     private String status;

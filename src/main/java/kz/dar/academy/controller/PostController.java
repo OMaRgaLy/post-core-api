@@ -1,6 +1,7 @@
 package kz.dar.academy.controller;
 
-import kz.dar.academy.model.PostModel;
+import kz.dar.academy.model.PostRequest;
+import kz.dar.academy.model.PostResponse;
 import kz.dar.academy.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -28,31 +29,27 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createPost(@Valid @RequestBody PostModel postModel) {
-        postService.createPost(postModel);
-        return new ResponseEntity<String>("Succesfully created", HttpStatus.OK);
+    public PostResponse createPost(@Valid @RequestBody PostRequest postRequest) {
+        return postService.createPost(postRequest);
+    }
+
+    @PutMapping
+    public PostResponse updatePost(@Valid @RequestParam PostRequest postRequest) {
+        return postService.updatePost(postRequest);
     }
 
     @GetMapping("/all")
-    public List<PostModel> getAllPosts() {
+    public List<PostResponse> getAllPosts() {
         return postService.getAllPosts();
     }
 
-    @GetMapping("/{postId}")
-    public PostModel getPostById(@PathVariable String postId) {
+    @GetMapping
+    public PostResponse getPostById(@RequestParam String postId) {
         return postService.getPostById(postId);
     }
 
-    @PutMapping("/{postId}")
-    public ResponseEntity<String> updatePostById(@PathVariable String postId,
-                                                     @Valid @RequestBody PostModel postModel) {
-        postService.updatePostById(postId, postModel);
-        return new ResponseEntity<String>("Succesfully updated", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<String> deletePostById(@PathVariable String postId) {
+    @DeleteMapping
+    public void deletePostById(@RequestParam String postId) {
         postService.deletePostById(postId);
-        return new ResponseEntity<String>("Succesfully deleted", HttpStatus.OK);
     }
 }
